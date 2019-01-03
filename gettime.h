@@ -1,7 +1,7 @@
 #ifndef gettime_h
 #define gettime_h
 
-#ifdef __APPLE__
+#ifndef __APPLE__
 typedef enum {
 	CLOCK_REALTIME,
 	CLOCK_MONOTONIC,
