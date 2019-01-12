@@ -1,0 +1,219 @@
+[
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "lock_client.o", 
+            "lock_client.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "lock_client.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "lock_demo.o", 
+            "lock_demo.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "lock_demo.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "gettime.o", 
+            "gettime.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "gettime.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/connection.o", 
+            "rpc/connection.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/connection.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "lock_tester.o", 
+            "lock_tester.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "lock_tester.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/rpc.o", 
+            "rpc/rpc.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/rpc.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "rpc/librpc.a", 
+            "-o", 
+            "rpc/rpctest", 
+            "rpc/rpctest.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/rpctest.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "lock_server.o", 
+            "lock_server.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "lock_server.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/jsl_log.o", 
+            "rpc/jsl_log.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/jsl_log.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "lock_smain.o", 
+            "lock_smain.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "lock_smain.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/pollmgr.o", 
+            "rpc/pollmgr.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/pollmgr.cc"
+    }, 
+    {
+        "arguments": [
+            "g++-8", 
+            "-c", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=1", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/thr_pool.o", 
+            "rpc/thr_pool.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/thr_pool.cc"
+    }
+]
