@@ -88,6 +88,13 @@ yfs_client::getdir(inum inum, dirinfo &din)
  release:
   return r;
 }
+yfs_client::status 
+yfs_client::create(key_t parentId, std::string name, int isFile, yfs_client::inum & ret){
+  int err = ec->create( parentId, name,  isFile,ret);
+  return err; 
+}
+
+
 
 
 

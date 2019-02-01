@@ -15,7 +15,9 @@ class extent_protocol {
     get,
     getattr,
     remove,
-    createbook
+    create,
+    genINum,
+    lookUp
   };
 
   struct attr {

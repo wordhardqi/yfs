@@ -221,6 +221,27 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
   e->entry_timeout = 0.0;
   e->generation = 0;
   // You fill this in for Lab 2
+  std::string name_str(name);
+  int isFound;
+  yfs_client::INUM INum  = 0;
+  extent_protocol::attr attr;
+
+  int tmpRet = yfs->lookUp(parent,name_str,isFound,INum,attr);
+  if (tmpRet == yfs_client::NOENT){
+    return yfs_client::NOENT;
+  }
+  if (isFound) {
+    return yfs_client::EXIST;
+  }
+  yfs->create(parent, name_str, true, INum );
+  yfs->lookUp(parent,name,isFound,INum,attr);
+  e->ino = INum;
+  e->attr.st_ctime = attr.ctime;
+  e->attr.st_atime = attr.atime;
+  e->attr.st_mtime = attr.mtime;
+  e->attr.st_size = attr.size;
+  return yfs_client::OK;
+
   return yfs_client::NOENT;
 }
 
@@ -315,6 +336,22 @@ int reply_buf_limited(fuse_req_t req, const char *buf, size_t bufsize,
 //
 // Call dirbuf_add(&b, name, inum) for each entry in the directory.
 //
+std::vector<std::string> split(std::string str, std::string token){
+    std::vector<std::string>result;
+    while(str.size()){
+        int index = str.find(token);
+        if(index!= std::string::npos){
+            result.push_back(str.substr(0,index));
+            str = str.substr(index+token.size());
+            if(str.size()==0)result.push_back(str);
+        }else{
+            result.push_back(str);
+            str = "";
+        }
+    }
+    return result;
+}
+
 void
 fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
                    off_t off, struct fuse_file_info *fi)
@@ -323,16 +360,32 @@ fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
   struct dirbuf b;
 
   printf("fuseserver_readdir\n");
-
+  
   if(!yfs->isdir(inum)){
     fuse_reply_err(req, ENOTDIR);
     return;
   }
+  
+
 
   memset(&b, 0, sizeof(b));
 
 
   // You fill this in for Lab 2
+  std::string dir_str  ;
+  yfs->ec->get(inum,dir_str);
+  std::vector<std::string> info = split(dir_str,",");
+  info.erase(info.begin());
+  if(info.empty()){
+    return;
+  }
+  for(auto iter = info.begin();iter !=info.end();){
+    std::string name = *iter;
+    ++iter;
+    yfs_client::inum childIno = std::stoull(*iter);
+    ++iter;
+    dirbuf_add(&b, name.c_str(),childIno);
+  }
 
 
   reply_buf_limited(req, b.p, b.size, off, size);

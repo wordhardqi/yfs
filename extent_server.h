@@ -5,6 +5,7 @@
 
 #include <string>
 #include <map>
+#include <set>
 #include "extent_protocol.h"
 #include <mutex>
 
@@ -23,9 +24,10 @@ class extent_server {
   int get(extent_protocol::extentid_t id, std::string &);
   int getattr(extent_protocol::extentid_t id, extent_protocol::attr &);
   int remove(extent_protocol::extentid_t id, int &);
-  int genINum(extent_protocol::extentid_t id, int is_file);
-  int create(key_t parentId, std::string name, int isFile,key_t ret);
-  
+  int genINum( int is_file, key_t & ino);
+  int create(key_t parentId, std::string name, int isFile,key_t & ret);
+  void addChildren(key_t & parentId,key_t & childId, std::string & name);
+  int lookUp(key_t parentId, std::string name, int & isFound ,key_t & childId, extent_protocol::attr & attr);
   private:
   std::map<key_t, std::string> content_;
   std::map<key_t, extent_protocol::attr> attr_;

@@ -9,9 +9,10 @@
 #include <fcntl.h>
 #include <chrono>
 #include <cstdlib>
+typedef extent_protocol::extentid_t INUM;
 
 bool
-isfile(extent_server::key_t inum)
+isfile(INUM inum)
 {
   if(inum & 0x80000000)
     return true;
@@ -19,7 +20,7 @@ isfile(extent_server::key_t inum)
 }
 
 bool
-isdir(extent_server::key_t inum)
+isdir(INUM inum)
 {
   return ! isfile(inum);
 }
@@ -81,8 +82,8 @@ int extent_server::remove(extent_protocol::extentid_t id, int &)
   content_.erase(id);
   return extent_protocol::OK;
 }
-int extent_server::genINum(extent_protocol::extentid_t id, int is_file){
-  key_t  ino = 0;
+int extent_server::genINum( int is_file, INUM & INum){
+  INUM  ino = 0;
   std::srand(getCurrentTime());
   do {
     ino = rand() % 0x80000000LLU;
@@ -91,18 +92,26 @@ int extent_server::genINum(extent_protocol::extentid_t id, int is_file){
         ino |= 0x80000000LLU;
     }
   } while(content_.find(ino)!= content_.end());
-
-  return ino;
+  INum = ino;
+  return extent_protocol::OK;
 }
 
+void extent_server::addChildren(INUM & parentId,INUM & childId,std::string & name){
+  children_[parentId].push_back(childId);
+  parent_[childId] = parentId;
+  int ret = 0;
+  put(parentId,
+  content_[parentId] + ":" + name + std::to_string(childId), ret);
 
-int extent_server::create(key_t parentId, std::string name, int isFile,key_t ret){
+}
+
+int extent_server::create(INUM parentId, std::string name, int isFile,INUM & ret){
   LockGurad lk(m_);
   const auto iter = content_.find(parentId);
   if (iter == content_.end()){
-    return extent_protocol::IOERR;
+    return extent_protocol::NOENT;
   }
-  auto & children = iter->second;
+  std::vector<INUM> & children = children_[parentId];
   for( auto & child : children){
       if (isfile(child)){
         if (content_[child] == name){
@@ -110,12 +119,38 @@ int extent_server::create(key_t parentId, std::string name, int isFile,key_t ret
         }
       } 
   }
-  key_t ino = genINum(parentId, isFile);
+  INUM ino;
+  genINum( isFile, ino);
   int useless_ret;
   put(ino,name,useless_ret);
-  children.push_back(ino);
+  ret = ino;
+  addChildren(parentId, ino,name);
+  return extent_protocol::OK;
+
+
   
-  
+}
+
+
+
+
+int extent_server::lookUp(INUM parentId, std::string name, int & isFound ,INUM & childId, extent_protocol::attr & attr){
+  LockGurad lk(m_);
+  isFound = false;
+  const auto iter = content_.find(parentId);
+  if (iter == content_.end()){
+    return extent_protocol::NOENT;
+  }
+  std::vector<INUM> & children = children_[parentId];
+  for (auto & child : children){
+    if (content_[child] == name){
+      childId = child;
+      isFound = true;
+      getattr(childId,attr);
+      return extent_protocol::OK;
+    }
+  }
+  return extent_protocol::NOENT;
 
   
 }
