@@ -1,0 +1,40 @@
+[
+    {
+        "arguments": [
+            "/Library/Developer/CommandLineTools/usr/bin/clang++", 
+            "-c", 
+            "-std=c++14", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=2", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/rpc.o", 
+            "rpc/rpc.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/rpc.cc"
+    }, 
+    {
+        "arguments": [
+            "clang++", 
+            "-c", 
+            "-std=c++14", 
+            "-g", 
+            "-Wall", 
+            "-I.", 
+            "-I./rpc", 
+            "-DLAB=2", 
+            "-DSOL=0", 
+            "-D_FILE_OFFSET_BITS=64", 
+            "-o", 
+            "rpc/rpc.o", 
+            "rpc/rpc.cc"
+        ], 
+        "directory": "/Users/renming/yfs-class", 
+        "file": "rpc/rpc.cc"
+    }
+]
