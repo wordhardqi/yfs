@@ -8,13 +8,10 @@
 
 
 class yfs_client {
- public:
   extent_client *ec;
+ public:
 
   typedef unsigned long long inum;
-  typedef unsigned long long INUM;
-  typedef INUM key_t;
-
   enum xxstatus { OK, RPCERR, NOENT, IOERR, EXIST };
   typedef int status;
 
@@ -46,18 +43,14 @@ class yfs_client {
 
   int getfile(inum, fileinfo &);
   int getdir(inum, dirinfo &);
-  yfs_client::status create(key_t parentId, std::string name, int isFile,key_t & ret);
-  
-  yfs_client::status genINum(int isFile, INUM & INum){
-    int ret = ec->genINum(isFile,INum);
-    return ret ;
-  }
-  
-  yfs_client::status lookUp(INUM parentId, std::string name,int & isFound, INUM & childId, extent_protocol::attr & attr){
-      int ret = ec->lookUp(parentId,name,isFound,childId, attr );
-      return ret; 
-  };
-  
+  int setattr(inum, struct stat *);
+  int read(inum, off_t, size_t, std::string &);
+  int write(inum, off_t, size_t, const char *);
+  inum random_inum(bool);
+  int create(inum, const char *, inum &);
+  int lookup(inum, const char *, inum &, bool *);
+  int readdir(inum, std::list<dirent> &);
+
 };
 
 #endif 

@@ -8,7 +8,7 @@
 #include <time.h>
 
 // The calls assume that the caller holds a lock on the extent
-typedef extent_client::key_t INUM;
+
 extent_client::extent_client(std::string dst)
 {
   sockaddr_in dstsock;
@@ -53,12 +53,5 @@ extent_client::remove(extent_protocol::extentid_t eid)
   ret = cl->call(extent_protocol::remove, eid, r);
   return ret;
 }
-extent_protocol::status 
-extent_client::create(INUM parentId, std::string name, int isFile,INUM & ret) {
-  int ino;
-  ret = cl->call(extent_protocol::create, parentId, name, isFile, ino);
-  return ret; 
-}
-
 
 

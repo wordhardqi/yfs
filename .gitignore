@@ -1,0 +1,8 @@
+*.o
+*.d
+*.log
+yfs_client1.log
+yfs_client2.log
+yfs1/*
+yfs2/*
+*.a

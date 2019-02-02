@@ -2,14 +2,16 @@
 #define gettime_h
 
 #ifndef __APPLE__
-typedef enum {
-	CLOCK_REALTIME,
-	CLOCK_MONOTONIC,
-	CLOCK_PROCESS_CPUTIME_ID,
-	CLOCK_THREAD_CPUTIME_ID
-} clockid_t;
 
-int clock_gettime(clockid_t clk_id, struct timespec *tp);
+
+#include <time.h>
+
+// #define CLOCK_REALTIME  0
+// #define CLOCK_MONOTONIC = 1;
+// #define CLOCK_PROCESS_CPUTIME_ID =  2;
+// #define CLOCK_THREAD_CPUTIME_ID = 3;
+// typedef  int clockid_t;
+int clock_gettime( clockid_t clk_id, struct timespec *tp);
 #endif
 
 #endif
