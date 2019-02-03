@@ -37,13 +37,14 @@ int id() {
 // less correct values for the access/modify/change times
 // (atime, mtime, and ctime), and correct values for file sizes.
 //
+
+
 yfs_client::status
 getattr(yfs_client::inum inum, struct stat &st)
 {
   yfs_client::status ret;
 
   bzero(&st, sizeof(st));
-
   st.st_ino = inum;
   printf("getattr %016llx %d\n", inum, yfs->isfile(inum));
   if(yfs->isfile(inum)){
@@ -423,7 +424,19 @@ fuseserver_mkdir(fuse_req_t req, fuse_ino_t parent, const char *name,
   (void) e;
 
   // You fill this in for Lab 3
-#if 0
+#if 1
+  yfs_client::status ret;
+  yfs_client::inum inum;
+  ret = yfs->mkdir(parent,name, mode, inum);
+  if(ret == yfs_client::OK){
+    e.ino = inum;
+    getattr(e.ino,e.attr);
+    fuse_reply_entry(req, &e);
+    return;
+  }else if (ret == yfs_client::EXIST ){
+    fuse_reply_err(req,EEXIST);
+    return ;
+  }
   fuse_reply_entry(req, &e);
 #else
   fuse_reply_err(req, ENOSYS);
@@ -444,7 +457,17 @@ fuseserver_unlink(fuse_req_t req, fuse_ino_t parent, const char *name)
   // You fill this in for Lab 3
   // Success:	fuse_reply_err(req, 0);
   // Not found:	fuse_reply_err(req, ENOENT);
-  fuse_reply_err(req, ENOSYS);
+  yfs_client::status ret;
+
+  ret = yfs->unlink(parent,name);
+  if(ret == yfs_client::OK){
+    fuse_reply_err(req,0);
+    return; 
+  }else {
+    fuse_reply_err(req,0);
+    return; 
+  }
+
 }
 
 void

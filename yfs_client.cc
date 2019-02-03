@@ -94,7 +94,7 @@ yfs_client::getdir(inum inum, dirinfo &din)
   return r;
 }
 
-int 
+int
 yfs_client::setattr(inum inum, struct stat *attr)
 {
 	int r = OK;
@@ -113,9 +113,9 @@ release:
 	return r;
 }
 
-int 
+int
 yfs_client::read(inum inum, off_t off, size_t size, std::string &buf)
-{	
+{
 	int r = OK;
 	std::string file_data;
 	size_t read_size;
@@ -127,15 +127,15 @@ yfs_client::read(inum inum, off_t off, size_t size, std::string &buf)
 	if (off >= file_data.size())
 		buf = std::string();
 	read_size = size;
-	if(off + size > file_data.size()) 
+	if(off + size > file_data.size())
 		read_size = file_data.size() - off;
 	buf = file_data.substr(off, read_size);
 
 release:
-	return r;	
+	return r;
 }
 
-int 
+int
 yfs_client::write(inum inum, off_t off, size_t size, const char *buf)
 {
 	int r = OK;
@@ -172,7 +172,7 @@ yfs_client::create(inum parent, const char *name, inum &inum)
 	if (ec->get(parent, dir_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
-	}	
+	}
 	file_name = "/" + std::string(name) + "/";
 	if (dir_data.find(file_name) != std::string::npos) {
 		return EXIST;
@@ -193,7 +193,7 @@ release:
 }
 
 int
-yfs_client::lookup(inum parent, const char *name, inum &inum, bool *found) 
+yfs_client::lookup(inum parent, const char *name, inum &inum, bool *found)
 {
 	int r = OK;
 	size_t pos, end;
@@ -212,7 +212,7 @@ yfs_client::lookup(inum parent, const char *name, inum &inum, bool *found)
 		end = dir_data.find_first_of("/", pos);
 		if(end != std::string::npos) {
 			ino = dir_data.substr(pos, end-pos);
-			inum = n2i(ino.c_str());		
+			inum = n2i(ino.c_str());
 		} else {
 			r = IOERR;
 			goto release;
@@ -224,8 +224,8 @@ release:
 	return r;
 }
 
-int 
-yfs_client::readdir(inum inum, std::list<dirent> &dirents) 
+int
+yfs_client::readdir(inum inum, std::list<dirent> &dirents)
 {
 	int r = OK;
 	std::string dir_data;
@@ -234,7 +234,7 @@ yfs_client::readdir(inum inum, std::list<dirent> &dirents)
 	if (ec->get(inum, dir_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
-	}	
+	}
 	pos = 0;
 	while(pos != dir_data.size()) {
 		dirent entry;
@@ -244,14 +244,89 @@ yfs_client::readdir(inum inum, std::list<dirent> &dirents)
 		name_end = dir_data.find_first_of("/", pos + 1);
 		name_len = name_end - pos - 1;
 		entry.name = dir_data.substr(pos + 1, name_len);
-		
+
 		inum_end = dir_data.find_first_of("/", name_end + 1);
 		inum_len = inum_end - name_end - 1;
 		inum_str = dir_data.substr(name_end + 1, inum_len);
-		entry.inum = n2i(inum_str.c_str());	
+		entry.inum = n2i(inum_str.c_str());
 		dirents.push_back(entry);
 		pos = inum_end + 1;
 	}
 release:
 	return r;
 }
+
+int yfs_client::mkdir(inum parent, const char * name, mode_t mode, inum & inum){
+  int r = OK;
+  std::string dir_data;
+  std::string dirent, dirname;
+  if( ec->get(parent,dir_data) != OK){
+    r = IOERR;
+    return r;
+  }
+
+  dirname = '/'+ std::string(name)+'/';
+  if(dir_data.find(dirname)!=std::string::npos){
+    r = EXIST;
+    return r;
+  }
+
+  inum = random_inum(false);
+  if(ec->put(inum,std::string())!=OK){
+    r = IOERR;
+    return r;
+  }
+
+  dirent = dirname + filename(inum) +'/';
+  dir_data +=dirent;
+  if(ec->put(parent,dir_data)!=OK){
+    return IOERR;
+  }
+
+  return r;
+
+  }
+
+
+
+int
+yfs_client::unlink(inum parent, const char *name)
+{
+	int r = OK;
+	std::string dir_data;
+	std::string filename = "/" + std::string(name) + "/";
+	size_t pos, end, len;
+	inum inum;
+	// ScopedLockClient ulc(lc, parent);
+	if (ec->get(parent, dir_data) != extent_protocol::OK) {
+		r = IOERR;
+		goto release;
+	}
+	if ((pos = dir_data.find(filename)) == std::string::npos) {
+		r = NOENT;
+		goto release;
+	}
+
+	end = dir_data.find_first_of("/", pos + filename.size());
+	if( end == std::string::npos) {
+		r= NOENT;
+		goto release;
+	}
+	len = end - filename.size() - pos;
+	inum = n2i(dir_data.substr(pos+filename.size(), len));
+	if (!isfile(inum)) {
+		r = IOERR;
+		goto release;
+	}
+	dir_data.erase(pos, end - pos + 1);
+	if (ec->put(parent, dir_data) != extent_protocol::OK) {
+		r = IOERR;
+		goto release;
+	}
+	if (ec->remove(inum) != extent_protocol::OK) {
+		r = IOERR;
+	}
+ release:
+	return r;
+}
+

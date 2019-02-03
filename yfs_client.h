@@ -52,7 +52,8 @@ class yfs_client {
   int create(inum, const char *, inum &);
   int lookup(inum, const char *, inum &, bool *);
   int readdir(inum, std::list<dirent> &);
-
+  int mkdir(inum parent, const char * name, mode_t mode, inum & inum);
+  int unlink(inum parent, const char * name);
 };
 
 #endif 
