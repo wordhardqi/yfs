@@ -9,8 +9,24 @@
 #include "lock_protocol.h"
 #include "lock_client.h"
 
+
+class ScopedLockClient {
+private:
+  lock_client * lc_;
+  lock_protocol::lockid_t lid_;
+public: 
+  ScopedLockClient(lock_client* lc, lock_protocol::lockid_t lid):
+    lc_(lc), lid_(lid){
+    lc_->acquire(lid);
+  }
+  ~ScopedLockClient(){
+    lc_->release(lid_);
+    lc_ = NULL;
+  }
+};
 class yfs_client {
   extent_client *ec;
+  lock_client * lc;
  public:
 
   typedef unsigned long long inum;

@@ -14,6 +14,7 @@
 yfs_client::yfs_client(std::string extent_dst, std::string lock_dst)
 {
   ec = new extent_client(extent_dst);
+  lc = new lock_client(lock_dst);
 
 }
 
@@ -56,6 +57,7 @@ yfs_client::getfile(inum inum, fileinfo &fin)
   // - hold and release the file lock
 
   printf("getfile %016llx\n", inum);
+  ScopedLockClient slc(lc,inum);
   extent_protocol::attr a;
   if (ec->getattr(inum, a) != extent_protocol::OK) {
     r = IOERR;
@@ -82,6 +84,8 @@ yfs_client::getdir(inum inum, dirinfo &din)
 
   printf("getdir %016llx\n", inum);
   extent_protocol::attr a;
+  
+  ScopedLockClient slc(lc,inum);
   if (ec->getattr(inum, a) != extent_protocol::OK) {
     r = IOERR;
     goto release;
@@ -100,6 +104,8 @@ yfs_client::setattr(inum inum, struct stat *attr)
 	int r = OK;
 	size_t size = attr->st_size;
 	std::string buf;
+  
+  ScopedLockClient slc(lc,inum);
 	if (ec->get(inum, buf) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
@@ -120,6 +126,7 @@ yfs_client::read(inum inum, off_t off, size_t size, std::string &buf)
 	std::string file_data;
 	size_t read_size;
 
+  ScopedLockClient slc(lc,inum);
 	if (ec->get(inum, file_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
@@ -140,6 +147,8 @@ yfs_client::write(inum inum, off_t off, size_t size, const char *buf)
 {
 	int r = OK;
 	std::string file_data;
+
+  ScopedLockClient slc(lc,inum);
 	if (ec->get(inum, file_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
@@ -169,6 +178,8 @@ yfs_client::create(inum parent, const char *name, inum &inum)
 	int r = OK;
 	std::string dir_data;
 	std::string file_name;
+
+  ScopedLockClient slc(lc,parent);
 	if (ec->get(parent, dir_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
@@ -200,6 +211,8 @@ yfs_client::lookup(inum parent, const char *name, inum &inum, bool *found)
 	std::string dir_data;
 	std::string file_name;
 	std::string ino;
+
+  ScopedLockClient slc(lc, parent);
 	if (ec->get(parent, dir_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
@@ -231,6 +244,8 @@ yfs_client::readdir(inum inum, std::list<dirent> &dirents)
 	std::string dir_data;
 	std::string inum_str;
 	size_t pos, name_end, name_len, inum_end, inum_len;
+
+  ScopedLockClient slc(lc,inum);
 	if (ec->get(inum, dir_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
@@ -260,6 +275,8 @@ int yfs_client::mkdir(inum parent, const char * name, mode_t mode, inum & inum){
   int r = OK;
   std::string dir_data;
   std::string dirent, dirname;
+
+  ScopedLockClient slc(lc,parent); 
   if( ec->get(parent,dir_data) != OK){
     r = IOERR;
     return r;
@@ -297,7 +314,7 @@ yfs_client::unlink(inum parent, const char *name)
 	std::string filename = "/" + std::string(name) + "/";
 	size_t pos, end, len;
 	inum inum;
-	// ScopedLockClient ulc(lc, parent);
+	ScopedLockClient ulc(lc,  parent);
 	if (ec->get(parent, dir_data) != extent_protocol::OK) {
 		r = IOERR;
 		goto release;
