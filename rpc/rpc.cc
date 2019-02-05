@@ -69,11 +69,12 @@
 #include <netinet/tcp.h>
 #include <time.h>
 #include <netdb.h>
+#include <unistd.h>
+#include <algorithm>
 
 #include "jsl_log.h"
 #include "gettime.h"
 #include "lang/verify.h"
-
 const rpcc::TO rpcc::to_max = { 120000 };
 const rpcc::TO rpcc::to_min = { 1000 };
 
@@ -599,7 +600,7 @@ rpcs::dispatch(djob_t *j)
 			VERIFY(rh.ret >= 0);
 
 			rep.pack_reply_header(rh);
-			rep.take_buf(&b1,&sz1);
+			rep.take_buf(&b1,&sz1);	
 
 			jsl_log(JSL_DBG_2,
 					"rpcs::dispatch: sending and saving reply of size %d for rpc %u, proc %x ret %d, clt %u\n",
@@ -663,6 +664,39 @@ rpcs::checkduplicate_and_update(unsigned int clt_nonce, unsigned int xid,
 	ScopedLock rwl(&reply_window_m_);
 
         // You fill this in for Lab 1.
+		VERIFY(xid_rep < xid);
+		std::list<reply_t>& reply_list = reply_window_.at(clt_nonce);
+		auto itr = reply_list.begin();
+		if(!reply_list.empty()){
+			while(itr->xid < xid_rep){
+				if(itr->buf) free(itr->buf);
+				itr = reply_list.erase(itr);
+
+			}
+			
+		}
+		if(!reply_list.empty()){
+			if(itr->xid > xid){
+				return FORGOTTEN;
+			}
+			for(;itr !=reply_list.end(); ++itr ){
+				if(itr->xid == xid){
+					if(itr->cb_present){
+						*b = itr->buf;
+						*sz = itr->sz;
+						return DONE;
+					}else {
+						return INPROGRESS;
+					}
+
+				}else if(itr->xid >xid ){
+					break;
+					//to return New; 
+				}
+			}
+		}
+		reply_list.insert(itr,reply_t(xid));
+
 	return NEW;
 }
 
@@ -676,6 +710,19 @@ rpcs::add_reply(unsigned int clt_nonce, unsigned int xid,
 		char *b, int sz)
 {
 	ScopedLock rwl(&reply_window_m_);
+	std::list<reply_t>& reply_list = reply_window_[clt_nonce];
+	auto iter = reply_list.begin();
+	for(;iter !=reply_list.end();++iter){
+		if(iter->xid ==xid){
+			iter->buf = b;
+			iter->sz =sz;
+			iter->cb_present = true;
+			break;
+		}
+	}
+	
+	
+
         // You fill this in for Lab 1.
 }
 

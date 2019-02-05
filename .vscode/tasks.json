@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "makeLockServer",
+            "type": "shell",
+            "command": "make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "runLockServer",
+            "type": "shell",
+            "command": "./lock_server",
+            "args": [
+                "3772"
+            ],
+            "options": {
+                "env": {
+                    "RPC_LOSSY": "5"
+                }
+            },
+            "dependsOn": [
+                "makeLockServer"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "runLockTester",
+            "type": "shell",
+            "command": "./lock_tester",
+            "args": [
+                "3772"
+            ],
+            "options": {
+                "env": {
+                    "RPC_LOSSY": "5"
+                }
+            },
+            "dependsOn": [],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}

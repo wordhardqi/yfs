@@ -16,6 +16,7 @@ my $files = { };
 my @dead;
 
 for(my $iters = 0; $iters < 200; $iters++){
+    print "$iters \n";
     createone();
 }
 
@@ -33,7 +34,7 @@ for(my $iters = 0; $iters < 100; $iters++){
         createone();
     }
 }
-
+print "end iters \n";
 dircheck();
 printf "Passed all tests!\n";
 exit(0);
@@ -103,6 +104,7 @@ sub dircheck {
 }
 
 sub livecheck {
+    print "livecheck \n";
     my @a = keys(%$files);
     return if $#a < 0;
     my $i = int(rand($#a + 1));
@@ -124,6 +126,7 @@ sub livecheck {
 }
 
 sub deadcheck {
+    print "deadcheck \n";
     my $name = "file-$$-" . $seq;
     $seq = $seq + 1;
     print "check-not-there $name\n";
