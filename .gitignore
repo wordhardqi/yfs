@@ -7,6 +7,5 @@ yfs1/*
 yfs2/*
 *.a
 .idea/
-.idea/*
 .vscode/
-.
+
