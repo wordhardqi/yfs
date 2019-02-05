@@ -10,18 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83e2d8d5-4534-4cd6-9470-37e3b0c215b5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/yfs.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/combo.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/yfs-class.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/compile_commands.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extent_server" beforeDir="false" afterPath="$PROJECT_DIR$/extent_server" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lock_server" beforeDir="false" afterPath="$PROJECT_DIR$/lock_server" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-lab-3-b" beforeDir="false" afterPath="$PROJECT_DIR$/test-lab-3-b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-lab-3-c" beforeDir="false" afterPath="$PROJECT_DIR$/test-lab-3-c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yfs_client" beforeDir="false" afterPath="$PROJECT_DIR$/yfs_client" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +43,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="1549361907000" />
+        <entry key="$PROJECT_DIR$" value="1549363019000" />
         <entry key="$PROJECT_DIR$/compile_commands.json" value="3742966992" />
       </map>
     </option>
@@ -120,10 +110,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/combo.sh">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+            <state relative-caret-position="187">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -191,6 +181,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="lab3" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -199,12 +194,14 @@
         <option value="$PROJECT_DIR$/GNUmakefile" />
         <option value="$PROJECT_DIR$/compile_commands.json" />
         <option value="$PROJECT_DIR$/combo.sh" />
+        <option value="$PROJECT_DIR$/lock_protocol.h" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="432" />
-    <option name="y" value="296" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="246" />
+    <option name="y" value="53" />
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -276,29 +273,30 @@
       <workItem from="1549278569392" duration="307000" />
       <workItem from="1549361829304" duration="112000" />
       <workItem from="1549361988371" duration="64000" />
-      <workItem from="1549362139408" duration="542000" />
+      <workItem from="1549362139408" duration="1334000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6465000" />
+    <option name="totallyTimeSpent" value="7257000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="26" y="0" width="1898" height="1084" extended-state="7" />
+    <frame x="246" y="53" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21203904" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2821068" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992785" visible="true" weight="0.2647059" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4992785" weight="0.328125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" weight="0.32935324" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32935324" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4978355" weight="0.34558824" />
+      <window_info anchor="bottom" id="Database Changes" order="7" weight="0.328125" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.328125" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4978355" visible="true" weight="0.3450521" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007215" side_tool="true" weight="0.328125" />
       <window_info anchor="bottom" id="Build" order="11" sideWeight="0.4978355" weight="0.29296875" />
       <window_info anchor="right" id="LuaJ" weight="0.32972583" />
@@ -315,6 +313,33 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sh" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="SHOW_DETAILS_IN_CHANGES" value="false" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/rpc/connection.d" />
@@ -376,6 +401,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/combo.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lock_protocol.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -383,10 +415,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/combo.sh">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+        <state relative-caret-position="187">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
