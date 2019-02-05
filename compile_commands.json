@@ -1,97 +1,317 @@
 [
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c yfs_client.cc -o yfs_client.o",
-  "file": "/data00/home/qirenming/yfs/yfs_client.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c extent_client.cc -o extent_client.o",
-  "file": "/data00/home/qirenming/yfs/extent_client.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -c -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=25 -I/usr/local/include/fuse -I/usr/include/fuse fuse.cc",
-  "file": "/data00/home/qirenming/yfs/fuse.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c lock_client.cc -o lock_client.o",
-  "file": "/data00/home/qirenming/yfs/lock_client.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c rpc/rpc.cc -o rpc/rpc.o",
-  "file": "/data00/home/qirenming/yfs/rpc/rpc.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c rpc/connection.cc -o rpc/connection.o",
-  "file": "/data00/home/qirenming/yfs/rpc/connection.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c rpc/pollmgr.cc -o rpc/pollmgr.o",
-  "file": "/data00/home/qirenming/yfs/rpc/pollmgr.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c rpc/thr_pool.cc -o rpc/thr_pool.o",
-  "file": "/data00/home/qirenming/yfs/rpc/thr_pool.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c rpc/jsl_log.cc -o rpc/jsl_log.o",
-  "file": "/data00/home/qirenming/yfs/rpc/jsl_log.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c gettime.cc -o gettime.o",
-  "file": "/data00/home/qirenming/yfs/gettime.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c extent_server.cc -o extent_server.o",
-  "file": "/data00/home/qirenming/yfs/extent_server.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c extent_smain.cc -o extent_smain.o",
-  "file": "/data00/home/qirenming/yfs/extent_smain.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c lock_server.cc -o lock_server.o",
-  "file": "/data00/home/qirenming/yfs/lock_server.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -std=c++14 -g -MMD -Wall -I. -I./rpc -DLAB=3 -DSOL=0 -D_FILE_OFFSET_BITS=64 -c lock_smain.cc -o lock_smain.o",
-  "file": "/data00/home/qirenming/yfs/lock_smain.cc"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -L. -L/usr/local/lib test-lab-3-b.c rpc/librpc.a -lpthread -lfuse -lrt -ldl -o test-lab-3-b",
-  "file": "/data00/home/qirenming/yfs/test-lab-3-b.c"
-}
-,
-{
-  "directory": "/data00/home/qirenming/yfs",
-  "command": "g++ -L. -L/usr/local/lib test-lab-3-c.c -lpthread -lfuse -lrt -ldl -o test-lab-3-c",
-  "file": "/data00/home/qirenming/yfs/test-lab-3-c.c"
-}
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "yfs_client.cc",
+   "-o",
+   "yfs_client.o"
+  ],
+  "file": "yfs_client.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "extent_client.cc",
+   "-o",
+   "extent_client.o"
+  ],
+  "file": "extent_client.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-c",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-D_FILE_OFFSET_BITS=64",
+   "-DFUSE_USE_VERSION=25",
+   "-I/usr/local/include/fuse",
+   "-I/usr/include/fuse",
+   "fuse.cc"
+  ],
+  "file": "fuse.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "lock_client.cc",
+   "-o",
+   "lock_client.o"
+  ],
+  "file": "lock_client.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "rpc/rpc.cc",
+   "-o",
+   "rpc/rpc.o"
+  ],
+  "file": "rpc/rpc.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "rpc/connection.cc",
+   "-o",
+   "rpc/connection.o"
+  ],
+  "file": "rpc/connection.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "rpc/pollmgr.cc",
+   "-o",
+   "rpc/pollmgr.o"
+  ],
+  "file": "rpc/pollmgr.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "rpc/thr_pool.cc",
+   "-o",
+   "rpc/thr_pool.o"
+  ],
+  "file": "rpc/thr_pool.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "rpc/jsl_log.cc",
+   "-o",
+   "rpc/jsl_log.o"
+  ],
+  "file": "rpc/jsl_log.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "gettime.cc",
+   "-o",
+   "gettime.o"
+  ],
+  "file": "gettime.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "extent_server.cc",
+   "-o",
+   "extent_server.o"
+  ],
+  "file": "extent_server.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "extent_smain.cc",
+   "-o",
+   "extent_smain.o"
+  ],
+  "file": "extent_smain.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "lock_server.cc",
+   "-o",
+   "lock_server.o"
+  ],
+  "file": "lock_server.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-std=c++14",
+   "-g",
+   "-MMD",
+   "-Wall",
+   "-I.",
+   "-I./rpc",
+   "-DLAB=3",
+   "-DSOL=0",
+   "-D_FILE_OFFSET_BITS=64",
+   "-c",
+   "lock_smain.cc",
+   "-o",
+   "lock_smain.o"
+  ],
+  "file": "lock_smain.cc"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-L.",
+   "-L/usr/local/lib",
+   "test-lab-3-b.c",
+   "rpc/librpc.a",
+   "-lpthread",
+   "-lfuse",
+   "-lrt",
+   "-ldl",
+   "-o",
+   "test-lab-3-b"
+  ],
+  "file": "test-lab-3-b.c"
+ },
+ {
+  "directory": "/home/renming/yfs",
+  "arguments": [
+   "g++",
+   "-L.",
+   "-L/usr/local/lib",
+   "test-lab-3-c.c",
+   "-lpthread",
+   "-lfuse",
+   "-lrt",
+   "-ldl",
+   "-o",
+   "test-lab-3-c"
+  ],
+  "file": "test-lab-3-c.c"
+ }
 ]
