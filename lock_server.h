@@ -22,6 +22,7 @@ struct lock_state {
       FREE = 0,
       BUSY,
     } state;
+
     lock_state() = default;
     std::condition_variable cv;
     // DISALLOW_COPY_AND_ASSIGN(lock_state);

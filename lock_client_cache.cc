@@ -22,12 +22,18 @@ lock_client_cache::lock_client_cache(std::string xdst,
   std::ostringstream host;
   host << hname << ":" << rlsrpc->port();
   id = host.str();
+  status_ = lock_client_cache_status::None ;
 }
 
 lock_protocol::status
 lock_client_cache::acquire(lock_protocol::lockid_t lid)
 {
   int ret = lock_protocol::OK;
+  muduo::MutexLockGuard lk(status_mutex_);
+  auto m_local = local_locks.find(lid);
+  if(m_local != local_locks.end()){
+
+  }
   return lock_protocol::OK;
 }
 

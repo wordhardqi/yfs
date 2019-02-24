@@ -9,6 +9,9 @@
 #include "rpc.h"
 #include "lock_client.h"
 #include "lang/verify.h"
+#include <muduo/base/BlockingQueue.h>
+#include "lock_server_cache.h"
+
 
 // Classes that inherit lock_release_user can override dorelease so that 
 // that they will be called when lock_client releases a lock.
@@ -18,14 +21,26 @@ class lock_release_user {
   virtual void dorelease(lock_protocol::lockid_t) = 0;
   virtual ~lock_release_user() {};
 };
-
+typedef enum {
+    None = 0,
+    Locked,
+    Acquiring,
+    Releasing,
+    Free
+} lock_client_cache_status;
 class lock_client_cache : public lock_client {
  private:
   class lock_release_user *lu;
   int rlock_port;
   std::string hostname;
   std::string id;
- public:
+  lock_client_cache_status status_;
+  muduo::MutexLock status_mutex_;
+  muduo::BlockingQueue<int> local_waiting_queue_;
+
+  std::map<lock_protocol::lockid_t, lock_cache_state> local_locks;
+
+public:
   lock_client_cache(std::string xdst, class lock_release_user *l = 0);
   virtual ~lock_client_cache() {};
   lock_protocol::status acquire(lock_protocol::lockid_t);
